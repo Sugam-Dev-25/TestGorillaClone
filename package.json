@@ -1,0 +1,38 @@
+{
+  "name": "testgorillaclone",
+  "version": "1.0.0",
+  "description": "This is Online Technical Assignment and Recruiter Platform Project",
+  "license": "ISC",
+  "author": "Sugam Karmakar",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cloudinary": "^2.10.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "csurf": "^1.11.0",
+    "dotenv": "^17.4.2",
+    "ejs": "^6.0.1",
+    "exceljs": "^4.4.0",
+    "express": "^5.2.1",
+    "express-mongo-sanitize": "^2.2.0",
+    "express-rate-limit": "^8.6.2",
+    "express-session": "^1.19.0",
+    "express-validator": "^7.3.2",
+    "helmet": "^8.3.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.9.1",
+    "morgan": "^1.11.0",
+    "multer": "^2.2.0",
+    "nodemailer": "^9.0.5",
+    "nodemon": "^3.1.14",
+    "pdfkit": "^0.19.1",
+    "xss-clean": "^0.1.4"
+  }
+}
