@@ -16,5 +16,6 @@ router.post('/assessments', recruiterController.createAssessment);
 router.get('/assessments', recruiterController.getAssessments);
 router.put('/assessments/publish/:assessmentId', recruiterController.publishAssessment);
 router.get('/assessments/:assessmentId/analytics', recruiterController.getAssessmentAnalytics);
+router.post('/assessments/:assessmentId/invite', recruiterController.inviteCandidate);
 
 module.exports = router;

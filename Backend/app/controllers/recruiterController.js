@@ -1,7 +1,7 @@
 const Question = require('../models/Question');
 const Assessment = require('../models/Assessment');
 const TestAttempt = require('../models/TestAttempt');
-
+const emailService = require('../services/emailService');
 class RecruiterController {
     constructor() {
         this.createQuestion = this.createQuestion.bind(this);
@@ -10,6 +10,7 @@ class RecruiterController {
         this.getAssessments = this.getAssessments.bind(this);
         this.publishAssessment = this.publishAssessment.bind(this);
         this.getAssessmentAnalytics = this.getAssessmentAnalytics.bind(this);
+        this.inviteCandidate = this.inviteCandidate.bind(this);
     }
 
     // 1. Create Question API
@@ -151,8 +152,6 @@ class RecruiterController {
         }
     }
 
-    // recruiterController.js-এ ক্লাসের ভেতরে যুক্ত করো:
-
     // Get Analytics & Candidates' Results for a Specific Assessment
     async getAssessmentAnalytics(req, res) {
         try {
@@ -193,6 +192,29 @@ class RecruiterController {
                 success: false,
                 message: error.message
             });
+        }
+    }
+
+    async inviteCandidate(req, res) {
+        try {
+            const { assessmentId } = req.params;
+            const { candidateEmail } = req.body;
+
+            const assessment = await Assessment.findOne({ _id: assessmentId, recruiterId: req.user._id });
+            if (!assessment) {
+                return res.status(404).json({ success: false, message: 'Assessment not found!' });
+            }
+
+            const testLink = `${process.env.FRONTEND_URL || 'http://localhost:3000'}/assessment/start/${assessment._id}`;
+
+            await emailService.sendAssessmentInvite(candidateEmail, assessment.title, testLink);
+
+            return res.status(200).json({
+                success: true,
+                message: `Invitation email sent successfully to ${candidateEmail}!`
+            });
+        } catch (error) {
+            return res.status(500).json({ success: false, message: error.message });
         }
     }
 }

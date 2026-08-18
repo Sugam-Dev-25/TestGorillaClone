@@ -1,4 +1,5 @@
 require('dotenv').config();
+const cors = require('cors');
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const connectDB = require('./app/config/db');
@@ -15,6 +16,13 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+app.use(cors({
+    origin: ['http://localhost:5173', 'http://localhost:3000'], // Vite Dev Server URL
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 // Base API Routes
 app.use('/api/auth', authRoutes);

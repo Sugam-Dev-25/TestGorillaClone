@@ -12,5 +12,7 @@ router.get('/assessments', candidateController.getAvailableAssessments);
 router.get('/assessments/start/:assessmentId', candidateController.startAssessment);
 router.post('/assessments/submit/:assessmentId', candidateController.submitAssessment);
 router.get('/results', candidateController.getMyResults);
+router.get('/certificate/download/:attemptId', candidateController.downloadCertificate);
+router.get('/dashboard', candidateController.getMyDashboard);
 
 module.exports = router;
